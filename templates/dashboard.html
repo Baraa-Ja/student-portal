@@ -1,0 +1,15 @@
+'''
+{% extends 'layout.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ student.name }}</h2>
+<p>Email: {{ student.email }}</p>
+<h3>Your Enrolled Courses:</h3>
+<ul>
+    {% for course in enrolled %}
+    <li><strong>{{ course.title }}</strong> - {{ course.description }}</li>
+    {% endfor %}
+</ul>
+<a href="/logout" class="btn btn-danger">Logout</a>
+{% endblock %}
+'''

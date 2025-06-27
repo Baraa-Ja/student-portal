@@ -1,0 +1,48 @@
+<!-- templates/courses.html -->
+{% extends "layout.html" %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+<h2>Available Courses</h2>
+<div id="courses" class="row row-cols-1 row-cols-md-2 g-4"></div>
+
+<script>
+$(document).ready(function () {
+    $.get("/api/courses", function (data) {
+        if (data.length === 0) {
+            $('#courses').html('<p>No courses available.</p>');
+        } else {
+            data.forEach(function (course) {
+                $('#courses').append(`
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${course.title}</h5>
+                                <p class="card-text">${course.description}</p>
+                                <button class="btn btn-primary enroll-btn" data-id="${course.id}">Enroll</button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+    });
+
+    $(document).on("click", ".enroll-btn", function () {
+        const courseId = $(this).data("id");
+        $.ajax({
+            url: "/ajax/enroll",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ course_id: courseId }),
+            success: function (res) {
+                if (res.success) {
+                    alert("Enrolled successfully!");
+                } else {
+                    alert(res.message);
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

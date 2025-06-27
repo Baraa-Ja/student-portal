@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<h2>Welcome, {{ user.name }}!</h2>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<h3 class="mt-4">Enrolled Courses</h3>
+<div id="enrolled-courses-list">
+    {% if courses %}
+        <ul class="list-group">
+            {% for course in courses %}
+            <li class="list-group-item">
+                <strong>{{ course.title }}</strong> - {{ course.description }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not enrolled in any courses yet.</p>
+    {% endif %}
+</div>
+
+<a href="{{ url_for('edit_profile') }}" class="btn btn-secondary mt-4">Edit Profile</a>
+{% endblock %}
