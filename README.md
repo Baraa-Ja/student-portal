@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Student Course Portal
 
@@ -51,3 +52,6 @@ student-portal/
 ├── requirements.txt
 ├── README.md
 ```
+=======
+# student-portal
+>>>>>>> d3b798e26e12f67ecf1cbb7a7ebf461cd7d34a1c
